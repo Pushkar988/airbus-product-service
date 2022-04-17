@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController {
 
     @Autowired
@@ -25,6 +26,13 @@ public class ProductController {
     @GetMapping("/product")
     public ResponseEntity getAll(@RequestParam(value = "category",required = false) String category){
         List<Product> res = productService.getAll(category);
+        ResponseEntity responseEntity = new ResponseEntity<>(res, HttpStatus.OK);
+        return responseEntity;
+    }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity getProductById(@PathVariable("id") Integer id){
+        Product res = productService.getProductById(id);
         ResponseEntity responseEntity = new ResponseEntity<>(res, HttpStatus.OK);
         return responseEntity;
     }

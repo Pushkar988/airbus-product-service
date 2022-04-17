@@ -30,5 +30,10 @@ public class ProductService {
 
     }
 
+    public Product getProductById(Integer id){
+        Product p =  productRepository.findById(id).get();
+        return p;
+    }
+
 
 }
